@@ -7,13 +7,21 @@ This document describes the Hermite wavelet collocation method used in this repo
 We solve the third-order ordinary differential equation
 
 $$
-y'''(x)=3\sin(x), \qquad 0 \le x \le 1,
+y'''(x)=3\sin(x), \qquad 0 \le x \le 1.
 $$
 
-with initial conditions
+The initial conditions are
 
 $$
-y(0)=1, \qquad y'(0)=0, \qquad y''(0)=-2.
+y(0)=1.
+$$
+
+$$
+y'(0)=0.
+$$
+
+$$
+y''(0)=-2.
 $$
 
 The exact solution is
@@ -34,23 +42,31 @@ y_h'''(x)
 c_{i,j}\psi_{i,j}(x).
 $$
 
-Here, the quantities have the following meanings:
+Here,
 
 $$
-i = \text{interval index},
+i
 $$
 
-$$
-j = \text{Hermite polynomial degree},
-$$
+is the interval index,
 
 $$
-c_{i,j} = \text{unknown wavelet coefficient},
+j
 $$
 
+is the Hermite polynomial degree,
+
 $$
-\psi_{i,j}(x) = \text{Hermite wavelet basis function}.
+c_{i,j}
 $$
+
+is the unknown wavelet coefficient, and
+
+$$
+\psi_{i,j}(x)
+$$
+
+is the Hermite wavelet basis function.
 
 The goal of the collocation procedure is to determine the unknown coefficients
 
@@ -82,7 +98,7 @@ c_{i,j}\psi_{i,j}(x_r)
 3\sin(x_r).
 $$
 
-This gives a linear algebraic system of the form
+This gives the linear algebraic system
 
 $$
 \Psi C = F.
