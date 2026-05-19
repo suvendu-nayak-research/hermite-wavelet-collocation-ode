@@ -97,8 +97,7 @@ $$
 c_{i,j}\psi_{i,j}(x_r)$$
 
 $$
-=
-3\sin(x_r).
+= 3\sin(x_r).
 $$
 
 This gives the linear algebraic system
@@ -112,8 +111,8 @@ The collocation matrix is defined by
 $$
 \Psi_{r,(i,j)}$$
 
-$$
-=
+
+$$=
 \psi_{i,j}(x_r).
 $$
 
@@ -174,7 +173,8 @@ From calculus, we have
 
 $$
 y_h(x)
-=
+=$$
+$$
 y(0)
 +
 xy'(0)
@@ -210,7 +210,8 @@ y(0)
 xy'(0)
 +
 \frac{x^2}{2}y''(0)
-=
+=$$
+$$
 1-x^2.
 $$
 
@@ -218,7 +219,8 @@ Therefore,
 
 $$
 y_h(x)
-=
+=$$
+$$
 1-x^2
 +
 \int_0^x
@@ -230,7 +232,8 @@ Substituting the Hermite wavelet expansion of the third derivative gives
 
 $$
 y_h(x)
-=
+=$$
+$$
 1-x^2
 +
 \sum_{i=1}^{N_x}
@@ -255,7 +258,9 @@ by
 
 $$
 (P_3)_{r,(i,j)}
-=
+=$$
+
+$$
 \int_0^{x_r}
 \frac{(x_r-s)^2}{2}
 \psi_{i,j}(s)\,ds.
@@ -265,7 +270,8 @@ The initial-condition vector is
 
 $$
 Y_{\mathrm{initial}}
-=
+=$$
+$$
 \begin{bmatrix}
 1-x_1^2 \\
 1-x_2^2 \\
@@ -278,7 +284,8 @@ The numerical solution vector is
 
 $$
 Y_h
-=
+=$$
+$$
 \begin{bmatrix}
 y_h(x_1) \\
 y_h(x_2) \\
@@ -291,7 +298,8 @@ The reconstruction formula is
 
 $$
 Y_h
-=
+=$$
+$$
 Y_{\mathrm{initial}}
 +
 P_3C.
@@ -309,7 +317,8 @@ $$
 
 $$
 y_h'''(x)
-=
+=$$
+$$
 \sum_{i=1}^{N_x}
 \sum_{j=0}^{M_x-1}
 c_{i,j}\psi_{i,j}(x),
@@ -327,7 +336,8 @@ and finally
 
 $$
 Y_h
-=
+=$$
+$$
 Y_{\mathrm{initial}}
 +
 P_3C.
