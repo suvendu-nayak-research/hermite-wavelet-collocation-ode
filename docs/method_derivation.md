@@ -95,6 +95,7 @@ $$
 \sum_{i=1}^{N_x}
 \sum_{j=0}^{M_x-1}
 c_{i,j}\psi_{i,j}(x_r)$$
+
 $$
 =
 3\sin(x_r).
@@ -110,6 +111,7 @@ The collocation matrix is defined by
 
 $$
 \Psi_{r,(i,j)}$$
+
 $$
 =
 \psi_{i,j}(x_r).
@@ -119,7 +121,8 @@ The coefficient vector is
 
 $$
 C
-=
+=$$
+$$
 \begin{bmatrix}
 c_{1,0} \\
 c_{1,1} \\
@@ -132,7 +135,8 @@ The right-hand side vector is
 
 $$
 F_r
-=
+=$$
+$$
 3\sin(x_r).
 $$
 
