@@ -34,17 +34,45 @@ y_h'''(x)
 c_{i,j}\psi_{i,j}(x).
 $$
 
-Here \(c_{i,j}\) are the unknown coefficients.
+Here, the quantities have the following meanings:
+
+$$
+i = \text{interval index},
+$$
+
+$$
+j = \text{Hermite polynomial degree},
+$$
+
+$$
+c_{i,j} = \text{unknown wavelet coefficient},
+$$
+
+$$
+\psi_{i,j}(x) = \text{Hermite wavelet basis function}.
+$$
+
+The goal of the collocation procedure is to determine the unknown coefficients
+
+$$
+c_{i,j}.
+$$
 
 ## Collocation System
 
-At the collocation points \(x_r\), we impose
+At the collocation points
+
+$$
+x_r,
+$$
+
+we impose the differential equation directly:
 
 $$
 y_h'''(x_r)=3\sin(x_r).
 $$
 
-Therefore,
+Using the Hermite wavelet approximation, this becomes
 
 $$
 \sum_{i=1}^{N_x}
@@ -54,56 +82,131 @@ c_{i,j}\psi_{i,j}(x_r)
 3\sin(x_r).
 $$
 
-This gives the algebraic system
+This gives a linear algebraic system of the form
 
 $$
-\Psi C = F,
+\Psi C = F.
 $$
 
-where
+The collocation matrix is defined by
 
 $$
-\Psi_{r,(i,j)}=\psi_{i,j}(x_r),
+\Psi_{r,(i,j)}
+=
+\psi_{i,j}(x_r).
 $$
 
-and
+The coefficient vector is
 
 $$
-F_r=3\sin(x_r).
+C
+=
+\begin{bmatrix}
+c_{1,0} \\
+c_{1,1} \\
+\vdots \\
+c_{i,j}
+\end{bmatrix}.
 $$
 
-Solving this system gives the coefficient vector \(C\).
+The right-hand side vector is
 
-## Reconstruction of the Numerical Solution
+$$
+F_r
+=
+3\sin(x_r).
+$$
 
-The coefficients \(c_{i,j}\) approximate the third derivative \(y'''(x)\), not the solution \(y(x)\) directly.
+Solving the system
 
-To recover \(y_h(x)\), we integrate three times:
+$$
+\Psi C = F
+$$
+
+gives the coefficient vector
+
+$$
+C.
+$$
+
+These coefficients approximate the third derivative
+
+$$
+y_h'''(x),
+$$
+
+not the solution
 
 $$
 y_h(x)
-=$$
 $$
-y(0)+xy'(0)+\frac{x^2}{2}y''(0)
+
+directly.
+
+## Reconstruction of the Numerical Solution
+
+Since the coefficients approximate the third derivative, the numerical solution must be recovered by integrating three times.
+
+From calculus, we have
+
+$$
+y_h(x)
+=
+y(0)
++
+xy'(0)
++
+\frac{x^2}{2}y''(0)
 +
 \int_0^x
-\frac{(x-s)^2}{2}y_h'''(s)\,ds.
+\frac{(x-s)^2}{2}
+y_h'''(s)\,ds.
 $$
 
 Using the initial conditions,
 
 $$
-y(0)+xy'(0)+\frac{x^2}{2}y''(0)
-=$$
+y(0)=1,
 $$
+
+$$
+y'(0)=0,
+$$
+
+and
+
+$$
+y''(0)=-2,
+$$
+
+the initial-condition part becomes
+
+$$
+y(0)
++
+xy'(0)
++
+\frac{x^2}{2}y''(0)
+=
 1-x^2.
 $$
 
-Thus,
+Therefore,
 
 $$
-y_h(x)$$
+y_h(x)
+=
+1-x^2
++
+\int_0^x
+\frac{(x-s)^2}{2}
+y_h'''(s)\,ds.
 $$
+
+Substituting the Hermite wavelet expansion of the third derivative gives
+
+$$
+y_h(x)
 =
 1-x^2
 +
@@ -111,28 +214,100 @@ $$
 \sum_{j=0}^{M_x-1}
 c_{i,j}
 \int_0^x
-\frac{(x-s)^2}{2}\psi_{i,j}(s)\,ds.
+\frac{(x-s)^2}{2}
+\psi_{i,j}(s)\,ds.
 $$
+
+This is the formula used to reconstruct the approximate solution.
 
 ## Third-Integration Matrix
 
-At the collocation points, define the third-integration matrix \(P_3\) by
+At the collocation points, define the third-integration matrix
 
 $$
-(P_3)_{r,(i,j)}$$
+P_3
+$$
 
-$$ =
+by
+
+$$
+(P_3)_{r,(i,j)}
+=
 \int_0^{x_r}
-\frac{(x_r-s)^2}{2}\psi_{i,j}(s)\,ds.
+\frac{(x_r-s)^2}{2}
+\psi_{i,j}(s)\,ds.
 $$
 
-Then the numerical solution vector is reconstructed as
+The initial-condition vector is
+
+$$
+Y_{\mathrm{initial}}
+=
+\begin{bmatrix}
+1-x_1^2 \\
+1-x_2^2 \\
+\vdots \\
+1-x_r^2
+\end{bmatrix}.
+$$
+
+The numerical solution vector is
 
 $$
 Y_h
-=$$
-$$
-Y_{\mathrm{initial}} + P_3 C.
+=
+\begin{bmatrix}
+y_h(x_1) \\
+y_h(x_2) \\
+\vdots \\
+y_h(x_r)
+\end{bmatrix}.
 $$
 
-This is the main reconstruction formula implemented in the code.
+The reconstruction formula is
+
+$$
+Y_h
+=
+Y_{\mathrm{initial}}
++
+P_3C.
+$$
+
+This is the main formula implemented in the code.
+
+## Summary of the Computational Flow
+
+The complete computational flow is
+
+$$
+y'''(x)=3\sin(x),
+$$
+
+$$
+y_h'''(x)
+=
+\sum_{i=1}^{N_x}
+\sum_{j=0}^{M_x-1}
+c_{i,j}\psi_{i,j}(x),
+$$
+
+$$
+\Psi C = F,
+$$
+
+$$
+C = \Psi^{-1}F,
+$$
+
+and finally
+
+$$
+Y_h
+=
+Y_{\mathrm{initial}}
++
+P_3C.
+$$
+
+Thus, the method first solves for the wavelet coefficients of the third derivative and then reconstructs the numerical solution by triple integration.
