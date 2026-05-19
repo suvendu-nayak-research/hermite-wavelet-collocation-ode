@@ -35,8 +35,9 @@ $$
 The third derivative is approximated using Hermite wavelet basis functions:
 
 $$
-y_h'''(x)
-=
+y_h'''(x)$$
+
+$$=
 \sum_{i=1}^{N_x}
 \sum_{j=0}^{M_x-1}
 c_{i,j}\psi_{i,j}(x).
@@ -93,7 +94,8 @@ Using the Hermite wavelet approximation, this becomes
 $$
 \sum_{i=1}^{N_x}
 \sum_{j=0}^{M_x-1}
-c_{i,j}\psi_{i,j}(x_r)
+c_{i,j}\psi_{i,j}(x_r)$$
+$$
 =
 3\sin(x_r).
 $$
@@ -107,7 +109,8 @@ $$
 The collocation matrix is defined by
 
 $$
-\Psi_{r,(i,j)}
+\Psi_{r,(i,j)}$$
+$$
 =
 \psi_{i,j}(x_r).
 $$
