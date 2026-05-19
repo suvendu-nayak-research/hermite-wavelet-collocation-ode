@@ -48,3 +48,30 @@ Install the required Python packages:
 
 ```bash
 pip install -r requirements.txt
+```
+
+Run the solver:
+
+```bash
+python hermite_wavelet_ode.py
+```
+
+## Repository Contents
+
+```text
+hermite-wavelet-collocation-ode/
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── hermite_wavelet_ode.py
+├── solution_comparison.png
+├── absolute_error.png
+└── docs/
+    └── method_derivation.md
+```
+
+## Notes
+
+This is a single-file scientific computing implementation designed for clarity and reproducibility.
+
+The next extensions will include nonlinear ODEs, coupled ODE systems, heat equations, and physics-informed neural networks.
